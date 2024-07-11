@@ -17,6 +17,7 @@ export default async function ClientesPage() {
       <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
         Clientes
       </h1>          
+    { clientes !== null && 
     <div className="mt-6 flow-root">
     <div className="overflow-x-auto">
       <div className="inline-block min-w-full align-middle">
@@ -75,7 +76,12 @@ export default async function ClientesPage() {
       </div>
     </div>
   </div>
-</div>
+</div>}
+{clientes === null && (
+  <div className="flex items-center justify-center h-96">
+      <p className="text-gray-500">No hay clientes registrados.</p>
+  </div>
+)}
 </div>
   );
 }

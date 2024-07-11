@@ -21,6 +21,7 @@ export default async function DetFacturaPage() {
             </button>
             </Link>
           </div>
+          {detfacturas !== null &&
           <div className="mt-6 flow-root">
             <div className="overflow-x-auto">
               <div className="inline-block min-w-full align-middle">
@@ -112,7 +113,12 @@ export default async function DetFacturaPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </div>}
+          {detfacturas === null && (
+            <div className="flex items-center justify-center h-96">
+              <p className="text-gray-500">No hay detalles de facturas registradas.</p>
+            </div>
+          )}
         </div>
       );
     }

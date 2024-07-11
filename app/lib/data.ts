@@ -6,7 +6,7 @@ export async function fetchEmpresas() {
       const response = await axios.get('http://localhost:8000/empresas');
       return response.data;  
   } catch (error) {
-    throw new Error('Failed to fetch empresas.');
+    return null;
   }
 }
 
@@ -15,7 +15,7 @@ export async function fetchClientes() {
     const response = await axios.get('http://localhost:8000/clientes');
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch clientes.');
+    return null;
   }
 }
 
@@ -24,7 +24,7 @@ export async function fetchProductos() {
     const response = await axios.get('http://localhost:8000/productos');
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch productos.');
+    return null;
   }
 }
 
@@ -33,7 +33,7 @@ export async function fetchDetFacturas() {
     const response = await axios.get('http://localhost:8000/det-factura');
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch detfacturas.');
+    return null;
   }
 }
 
@@ -42,6 +42,6 @@ export async function fetchMaeFacturas() {
     const response = await axios.get('http://localhost:8000/mae-factura');
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch detfacturas.');
+    return null;
   }
 }
