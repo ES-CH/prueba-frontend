@@ -45,3 +45,12 @@ export async function fetchMaeFacturas() {
     return null;
   }
 }
+
+export async function fetchFacturaById() {
+  try {
+    const response = await axios.get(`http://localhost:8000/mae-factura/20`);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}

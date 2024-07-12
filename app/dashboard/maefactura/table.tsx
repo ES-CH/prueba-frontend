@@ -1,4 +1,5 @@
 import { MaeFactura } from "@/app/lib/definition";
+import Link from "next/link";
 
 interface MaeFacturaTableProps {
     maefacturas: MaeFactura[];
@@ -61,6 +62,9 @@ export default function MaeFacturaTable({ maefacturas }: MaeFacturaTableProps) {
                         <th scope="col" className="px-3 py-5 font-medium">
                             Fecha auditoria
                         </th>
+                        <th scope="col" className="px-3 py-5 font-medium">
+                            Acciones
+                        </th>
                       </tr>
                     </thead>
     
@@ -89,6 +93,13 @@ export default function MaeFacturaTable({ maefacturas }: MaeFacturaTableProps) {
                             </td>
                             <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                                 {maedetfactura.fecha_auditoria}
+                            </td>
+                            <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                              <Link href={`/dashboard/maefactura/facturaupdate?id=${maedetfactura.id}`}>
+                                <button className="bg-sky-100 text-blue-600 rounded-md p-2 text-sm font-medium hover bg-sky-200">
+                                  Editar
+                                </button>
+                              </Link>
                             </td>
                         </tr>
                       ))}

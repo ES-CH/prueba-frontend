@@ -1,24 +1,25 @@
 'use client'
 
-import { Cliente, Empresa } from "@/app/lib/definition";
+import { Cliente, Empresa, MaeFactura } from "@/app/lib/definition";
 import axios from "axios";
 import { useState } from "react";
 
 interface MaeFacturaFormProps {
     empresas: Empresa;
     clientes: Cliente;
+    maeFactura?: MaeFactura;
 }
 
-export default function MaeFacturaForm({empresas, clientes}: MaeFacturaFormProps) {
+export default function MaeFacturaForm({empresas, clientes, maeFactura}: MaeFacturaFormProps) {
     const [formValues, setFormValues] = useState({
-      empresa: '',
-      numero: '',
-      fechaCreacion: '',
-      cliente: '',
-      observaciones: '',
-      total: '',
-      fechaAuditoria: '',
-    });
+      empresa: maeFactura?.empresa.id || '',
+      numero: maeFactura?.numero || '',
+      fechaCreacion: maeFactura?.fehca_creacion || '',
+      cliente: maeFactura?.cliente.id || '',
+      observaciones: maeFactura?.observaciones || '',
+      total: maeFactura?.total || '',
+      fechaAuditoria: maeFactura?.fecha_auditoria || '',
+});
   
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
       const { name, value } = e.target;
@@ -27,12 +28,27 @@ export default function MaeFacturaForm({empresas, clientes}: MaeFacturaFormProps
   
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        try {
-          const response = await axios.post('http://localhost:8000/mae-factura/', formValues);
-          location.href = '/dashboard/maefactura';          
-        } catch (error) {
-          alert('Error al crear la factura');
+        if (!formValues.empresa || !formValues.numero || !formValues.fechaCreacion || !formValues.cliente || !formValues.observaciones || !formValues.total || !formValues.fechaAuditoria) {
+          alert('Todos los campos son requeridos');
+          return;
         }
+        if (maeFactura) {
+          try {
+            const response = await axios.put(`http://localhost:8000/mae-factura/${maeFactura.id}`, formValues);
+            location.href = '/dashboard/maefactura';
+          } catch (error) {
+            alert('Error al actualizar la factura');
+          }
+          return;
+        }else{
+          try {
+            const response = await axios.post('http://localhost:8000/mae-factura/', formValues);
+            location.href = '/dashboard/maefactura';          
+          } catch (error) {
+            alert('Error al crear la factura');
+          }
+        }
+        
       };
 
       return (
@@ -41,17 +57,22 @@ export default function MaeFacturaForm({empresas, clientes}: MaeFacturaFormProps
           <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
             <label className="block">
               Empresa:
-              <select name="empresa" value={formValues.empresa} onChange={handleChange} className="mt-1 block w-full border-gray-300 shadow-sm rounded-md">
-                    {empresas.map((empresa: Empresa) => (
-                    <option key={empresa.id} value={empresa.id}>
-                        {empresa.nombre}
-                    </option>
-                    ))}
-                </select>
+              <select
+                name="empresa"
+                value={formValues.empresa}
+                onChange={handleChange}
+                className="mt-1 block w-full border-gray-300 shadow-sm rounded-md"
+              >
+                {empresas.map((empresa: Empresa) => (
+                  <option key={empresa.id} value={empresa.id}>
+                    {empresa.nombre}
+                  </option>
+                ))}
+              </select>
             </label>
             <label className="block">
               Número:
-              <input type="text" name="numero" value={formValues.numero} onChange={handleChange} className="mt-1 block w-full border-gray-300 shadow-sm rounded-md" />
+              <input type="number" name="numero" value={formValues.numero} onChange={handleChange} className="mt-1 block w-full border-gray-300 shadow-sm rounded-md" />
             </label>
             <label className="block">
               Fecha de Creación:
