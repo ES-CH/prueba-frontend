@@ -53,7 +53,10 @@ export default function MaeFacturaForm({empresas, clientes, maeFactura}: MaeFact
 
       return (
         <div className="max-w-4xl mx-auto py-8 px-4">
-          <h1 className="text-2xl font-bold mb-6">Crear factura</h1>
+          <h1 className="text-2xl font-bold mb-6">{
+            maeFactura ? 'Actualizar Factura' : 'Crear Factura'
+          }
+          </h1>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
             <label className="block">
               Empresa:

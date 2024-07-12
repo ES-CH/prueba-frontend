@@ -1,4 +1,5 @@
 import { Empresa } from "@/app/lib/definition";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
   interface EmpresasTableProps {
     empresas: Empresa[];
@@ -64,7 +65,9 @@ export default function EmpresasTable({ empresas }: EmpresasTableProps) {
                             {empresa.nombre}
                           </td>
                           <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
-                            {empresa.estado}
+                            {empresa.estado === 'A' ? 
+                              <CheckCircleIcon className="h-5 w-5 text-green-500" />
+                             : <XCircleIcon className="h-5 w-5 text-red-500" />}
                           </td>
                         </tr>
                       ))}

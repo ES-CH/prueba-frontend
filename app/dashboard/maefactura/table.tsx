@@ -48,9 +48,6 @@ export default function MaeFacturaTable({ maefacturas }: MaeFacturaTableProps) {
                           Numero
                         </th>
                         <th scope="col" className="px-3 py-5 font-medium">
-                          Fecha creacion
-                        </th>
-                        <th scope="col" className="px-3 py-5 font-medium">
                             Cliente
                         </th>
                         <th scope="col" className="px-3 py-5 font-medium">
@@ -78,9 +75,6 @@ export default function MaeFacturaTable({ maefacturas }: MaeFacturaTableProps) {
                           </td>
                           <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                             {maedetfactura.numero}
-                          </td>
-                          <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
-                            {maedetfactura.fehca_creacion}
                           </td>
                             <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                                 {maedetfactura.cliente.nombre}
